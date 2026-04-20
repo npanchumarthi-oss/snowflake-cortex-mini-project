@@ -1,0 +1,33 @@
+flowchart LR
+
+    subgraph Bronze["BRONZE – Raw Layer"]
+        A[Raw Feedback Files\nCSV / JSON]
+        B[BRONZE.FEEDBACK_RAW]
+    end
+
+    subgraph Silver["SILVER – Clean Layer"]
+        C[Cleaned Feedback\nNormalized + Typed]
+        D[SILVER.FEEDBACK_CLEAN]
+    end
+
+    subgraph Cortex["Cortex Enrichment"]
+        E[Sentiment\nSNOWFLAKE.CORTEX.SENTIMENT]
+        F[Topics\nSNOWFLAKE.CORTEX.TOPICS]
+        G[Summary\nSNOWFLAKE.CORTEX.SUMMARIZE]
+    end
+
+    subgraph Gold["GOLD – Enriched Layer"]
+        H[Enriched Feedback Table\nGOLD.FEEDBACK_ENRICHED]
+        I[Aggregated Views\nSentiment Trends, Themes, KPIs]
+    end
+
+    subgraph App["Streamlit App"]
+        J[Interactive Dashboard\nKPIs, Charts, Filters]
+    end
+
+    A --> B
+    B --> C --> D
+    D --> E --> H
+    D --> F --> H
+    D --> G --> H
+    H --> I --> J
