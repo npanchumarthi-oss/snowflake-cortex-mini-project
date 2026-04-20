@@ -1,0 +1,1 @@
+# Snowflake Cortex Mini Project 
